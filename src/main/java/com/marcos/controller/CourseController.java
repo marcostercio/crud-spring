@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marcos.model.Course;
+import com.marcos.dto.CourseDTO;
 import com.marcos.service.CourseService;
 
 import jakarta.validation.Valid;
@@ -14,7 +14,6 @@ import jakarta.validation.constraints.Positive;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,12 +37,12 @@ public class CourseController {
 
     // @RequestMapping(method = RequesMethod.GET )
     @GetMapping
-    public List<Course> list() {
+    public List<CourseDTO> list() {
         return courseService.list();
     }
 
     @GetMapping("/{id}")
-    public Course findById(@PathVariable @NotNull @Positive Long id) {
+    public CourseDTO findById(@PathVariable @NotNull @Positive Long id) {
         return courseService.findById(id);
     }
 
@@ -51,7 +50,7 @@ public class CourseController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     // public ResponseEntity<Course> create(@RequestBody Course course){
-    public Course create(@RequestBody @Valid Course course) {
+    public CourseDTO create(@RequestBody @Valid CourseDTO course) {
         // System.out.println(course.getName());
         return courseService.create(course);
         // usado com responeenttity return ResponseEntity.status(HttpStatus.CREATED)
@@ -59,7 +58,7 @@ public class CourseController {
     }
    
     @PutMapping("/{id}")
-    public Course update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course course) {
+    public CourseDTO update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid @NotNull CourseDTO course) {
         // TODO: process PUT request
         return courseService.update(id, course);
 
