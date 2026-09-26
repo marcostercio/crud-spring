@@ -46,7 +46,7 @@ public class CourseService {
     }
 
     public CourseDTO update( @NotNull @Positive Long id,  @Valid @NotNull  CourseDTO course) {
-        // TODO: process PUT request
+        
         return courseRepository.findById(id)
                 .map(recordFound -> {
                     recordFound.setName(course.name());

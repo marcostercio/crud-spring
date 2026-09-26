@@ -12,7 +12,7 @@ public class CategoryConverter implements AttributeConverter<Category, String> {
 
     @Override
     public String convertToDatabaseColumn(Category category) {
-        // TODO Auto-generated method stub
+        
         if(category == null) {
             return null;
         }
@@ -25,7 +25,7 @@ public class CategoryConverter implements AttributeConverter<Category, String> {
         if(value == null) {
             return null;
         }
-        // TODO Auto-generated method stub
+        
         return Stream.of(Category.values())
                 .filter(c -> c.getValue().equals(value))
                 .findFirst()

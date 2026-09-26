@@ -59,7 +59,7 @@ public class CourseController {
    
     @PutMapping("/{id}")
     public CourseDTO update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid @NotNull CourseDTO course) {
-        // TODO: process PUT request
+
         return courseService.update(id, course);
 
     }

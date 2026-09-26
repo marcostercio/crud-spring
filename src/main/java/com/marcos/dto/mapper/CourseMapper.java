@@ -1,8 +1,11 @@
 package com.marcos.dto.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.marcos.dto.CourseDTO;
+import com.marcos.dto.LessonDTO;
 import com.marcos.enums.Category;
 import com.marcos.model.Course;
 
@@ -14,7 +17,13 @@ public class CourseMapper {
       if(course == null) {
           return null;
       }
-        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue());
+        List<LessonDTO> lessons = course.getLessons()
+        .stream()
+          .map(lesson -> new LessonDTO(lesson.getId(), lesson.getName(), 
+          lesson.getYoutubeUrl()))
+          .toList();
+          
+        return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue(), lessons);
     }
     public Course toEntity(CourseDTO courseDTO) {
       if (  courseDTO == null) {
