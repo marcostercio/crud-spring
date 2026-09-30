@@ -13,10 +13,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-
 import com.marcos.enums.Category;
 import com.marcos.enums.converters.CategoryConverter;
 
@@ -25,7 +25,6 @@ import java.util.List;
 
 import org.hibernate.annotations.SoftDelete;
 
-@Data
 @Entity
 
 @SoftDelete 
@@ -54,8 +53,45 @@ public class Course {
     // @Length (max = 10)
     // @Pattern(regexp = "Ativo|Inativo")
     // @Column(length = 10, nullable = false)
+    @NotNull 
+    @NotEmpty
+    @Valid
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "course")
     //@JoinColumn(name = "course_id")
     private List<Lesson> lessons = new ArrayList<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
+    }
+
+    
 }
         

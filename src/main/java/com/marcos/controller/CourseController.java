@@ -1,15 +1,19 @@
 package com.marcos.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marcos.dto.CourseDTO;
+import com.marcos.dto.CoursePageDTO;
 import com.marcos.service.CourseService;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.util.List;
 
@@ -37,8 +41,9 @@ public class CourseController {
 
     // @RequestMapping(method = RequesMethod.GET )
     @GetMapping
-    public List<CourseDTO> list() {
-        return courseService.list();
+    public CoursePageDTO list(@RequestParam @PositiveOrZero int page, 
+        @RequestParam @Positive @Max(100) int pageSize) {
+        return courseService.list(page, pageSize);
     }
 
     @GetMapping("/{id}")
