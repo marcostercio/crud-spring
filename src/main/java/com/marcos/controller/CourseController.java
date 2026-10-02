@@ -15,8 +15,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,8 +39,8 @@ public class CourseController {
 
     // @RequestMapping(method = RequesMethod.GET )
     @GetMapping
-    public CoursePageDTO list(@RequestParam @PositiveOrZero int page, 
-        @RequestParam @Positive @Max(100) int pageSize) {
+    public CoursePageDTO list(@RequestParam(defaultValue = "0") @PositiveOrZero int page, 
+        @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize) {
         return courseService.list(page, pageSize);
     }
 
